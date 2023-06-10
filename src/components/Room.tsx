@@ -1,21 +1,27 @@
 // @flow 
-import * as React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 type Props = {
     
 };
+interface RoomModel{
+    name: string;
+}
 export const Room = (props: Props) => {
-    axios.get('http://localhost:3000/rooms')
-    .then(response => console.log(response))
-
-
+    const [rooms, setRooms] = useState<RoomModel[]>([]);
+    
+    axios.get('http://localhost:3000/rooms').then((response) => {
+       setRooms(response.data) 
+    });
+  
     return (
         <div>
             <h1>Rooms</h1>
             <ul>
-                <li>Room 1</li>
-                <li>Room 2</li>
-            </ul>
-        </div>
-    );
+            {rooms.map((room) => (
+                <li>{room.name}</li>
+            ))}
+        </ul>
+    </div>
+);
 };
