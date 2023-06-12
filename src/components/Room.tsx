@@ -1,5 +1,5 @@
 // @flow 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 type Props = {
     
@@ -10,9 +10,11 @@ interface RoomModel{
 export const Room = (props: Props) => {
     const [rooms, setRooms] = useState<RoomModel[]>([]);
     
-    axios.get('http://localhost:3000/rooms').then((response) => {
-       setRooms(response.data) 
-    });
+    useEffect(() => {
+        axios.get('http://localhost:3000/rooms').then((response) => {
+           setRooms(response.data);
+        });
+    }, []);
   
     return (
         <div>
