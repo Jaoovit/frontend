@@ -1,20 +1,24 @@
 // @flow 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-type Props = {
-    
-};
+type Props = {};
+
 interface RoomModel{
     name: string;
 }
+
+let countRender = 0;
 export const Room = (props: Props) => {
     const [rooms, setRooms] = useState<RoomModel[]>([]);
+
+    console.log(++countRender);
     
-    useEffect(() => {
+    useEffect (() => {
         axios.get('http://localhost:3000/rooms').then((response) => {
-           setRooms(response.data);
-        });
+            setRooms(response.data);
+         });
     }, []);
+    
   
     return (
         <div>
