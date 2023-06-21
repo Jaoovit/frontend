@@ -19,13 +19,16 @@ export const Room = (props: Props) => {
          });
     }, []);
     
+    const click =function click(event: React.MouseEvent<HTMLLIElement>) {
+        console.log(event);
+    }
   
     return (
         <div>
             <h1>Rooms</h1>
             <ul>
             {rooms.map((room) => (
-                <li>{room.name}</li>
+                <li onClick={click}>{room.name}</li>
             ))}
         </ul>
     </div>
